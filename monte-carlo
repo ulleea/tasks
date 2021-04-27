@@ -1,0 +1,38 @@
+import random
+import matplotlib.pyplot as plt
+import math
+def f(x):
+    return x**3
+a=0
+b=3
+A=f(a)
+B=f(b)
+n=200
+l=10
+i=20.25
+s=(b-a)*(B-A)
+delt = []
+ints = []
+for j in range(300):
+    n=n+l
+
+    sum=0
+    for _ in range(100):
+        k = 0
+        for i in range(n):
+            c=random.uniform(a,b)
+            C=random.uniform(A,B)
+            if C<=f(c):
+                k+=1
+        d=s*(k/n)
+        delta=abs(d-i)/i
+        sum+=delta
+    aver_delt=sum/100
+    delt.append(math.log(aver_delt))
+    ints.append(math.log(n))
+plt.plot(ints,delt)
+alpha = (delt[-1]-delt[1])/ (ints[-1]-ints[1])
+print(alpha)
+print(delt)
+print(ints)
+plt.show()
