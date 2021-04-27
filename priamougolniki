@@ -1,0 +1,31 @@
+n=int(input())
+a=[]
+for i in range(n):
+    s=input()
+    s=s.split()
+    a.append([int(s[0]),int(s[1]),[],[]])
+for i in range(n):
+    for j in range(n):
+        if i!=j:
+            if a[i][0]==a[j][0]:
+                a[i][2].append(j)
+            if a[i][1]==a[j][1]:
+                a[i][3].append(j)
+s=0
+p=[]
+print(a)
+for i in range(n):
+    for j in a[i][2]:
+        for k in a[j][3]:
+            for l in a[k][2]:
+                for o in a[l][3]:
+                    if a[l][3][o]==i:
+                        if abs((a[i][1]-a[j][1])*(a[j][0]-a[k][0]))>s:
+                            s=abs((a[i][1]-a[j][1])*(a[j][0]-a[k][0]))
+                            p=[i,j,k,l]
+for i in range(4):
+    for j in range(4):
+        if p[i]>p[j]:
+            p[i],p[j]=p[j],p[i]
+for i in range(4):
+    print(p[i]+1,end=' ')
