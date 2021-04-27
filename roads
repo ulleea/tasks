@@ -1,0 +1,70 @@
+def merge_sort(A):
+    if len(A) == 1 or len(A) == 0:
+        return
+    L, R = A[:len(A) // 2], A[len(A) // 2:]
+    merge_sort(L)
+    merge_sort(R)
+    n = m = k = 0
+    C = [0] * (len(L) + len(R))
+    while n < len(L) and m < len(R):
+        if L[n] <= R[m]:
+            C[k] = L[n]
+            n += 1
+        else:
+            C[k] = R[m]
+            m += 1
+        k += 1
+    while n < len(L):
+        C[k] = L[n]; n += 1; k += 1
+    while m < len(R):
+        C[k] = R[m]; m += 1; k += 1
+    for i in range(len(A)):
+        A[i] = C[i]
+
+n=int(input())
+a=[]
+b=[]
+for i in range(n):
+    s=input().split()
+    a.append(int(s[0]))
+    b.append(int(s[1]))
+merge_sort(a)
+merge_sort(b)
+# a.sort()
+# b.sort()
+# print(a)
+# print(b)
+l=1
+m=1
+r=0
+s=0
+st=a[0]
+while l+r<2*n:
+    if l<n:
+        if m==1:
+            if a[l]<b[r]:
+                s+=a[l]-st
+                l+=1
+                m+=1
+            elif a[l]>b[r]:
+                s+=b[r]-st
+                r+=1
+                m+=-1
+        elif a[l]<b[r]:
+            m+=1
+            if m==1:
+                st=a[l]
+            l+=1
+        elif a[l]>b[r]:
+            m+=-1
+            if m==1:
+                st=b[r]
+                r+=1
+    else:
+        if m==1:
+            s+=b[r]-st
+        m+=-1
+        if m==1:
+            st=b[r]
+        r+=1
+print(s)
